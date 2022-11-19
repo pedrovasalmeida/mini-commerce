@@ -1,6 +1,6 @@
 export function MiniCartFooter() {
   return (
-    <div className="flex flex-col h-auto mt-5">
+    <div className="flex flex-col h-auto mt-8">
       <div className="flex w-full items-center justify-between gap-4">
         <input
           className="p-3 w-3/5 rounded-lg text-sm outline-gray-900"
@@ -19,7 +19,7 @@ export function MiniCartFooter() {
 
         <div className="flex justify-between items-center w-full">
           <p className="text-gray-500 text-sm">Desconto</p>
-          <p className="text-green-600 font-bold text-sm">- R$ 999,9</p>
+          <p className="text-green-600 font-bold text-sm">- R$ 0,00</p>
         </div>
 
         <div className="flex justify-between items-center w-full">
@@ -30,7 +30,10 @@ export function MiniCartFooter() {
         <div id="separator" className="h-px w-full bg-gray-300" />
 
         <div className="flex justify-between items-center w-full">
-          <p className="text-gray-900 font-bold text-sm">Total</p>
+          <div className="flex gap-1 items-center">
+            <p className="text-gray-900 font-bold text-sm">Total</p>
+            <p className="text-xs text-gray-900 italic">(12 itens)</p>
+          </div>
           <p className="text-gray-900 font-bold text-sm">R$ 999,99</p>
         </div>
       </div>
