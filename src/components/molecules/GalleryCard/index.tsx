@@ -1,9 +1,21 @@
 import Image from 'next/image'
-import { BuyIcon } from '../../atoms/Icons'
+import { Product } from '../../../types/Product'
+import { formatPrice } from '../../../utils/handlePrice'
+import { BuyIcon, RatingStarIcon } from '../../atoms/Icons'
 
-export function GalleryCard() {
+interface GalleryCardProps {
+  product: Product
+}
+
+export function GalleryCard({ product }: GalleryCardProps) {
   return (
-    <div className="flex flex-col shadow-md bg-gray-50 rounded-lg w-[183px]">
+    <div className="relative flex flex-col shadow-md bg-gray-50 rounded-lg w-[183px]">
+      <div className="absolute top-2 right-2">
+        <div className="flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">
+          <RatingStarIcon />
+          <p className="font-bold text-xs">{product?.rating?.rate}</p>
+        </div>
+      </div>
       <Image
         src="https://thumbs.dreamstime.com/b/flesh-kiwi-cut-ripe-orange-15553893.jpg"
         alt="Product Image"
@@ -13,9 +25,9 @@ export function GalleryCard() {
         className="rounded-lg"
       />
       <div className="px-4">
-        <h3 className="text-sm pt-3">Cotton shirt regular fit</h3>
+        <h3 className="text-sm pt-3 line-clamp-1">{product?.title}</h3>
         <div className="flex justify-between mt-3 pb-5">
-          <p className="font-bold">R$ 100,00</p>
+          <p className="font-bold">{formatPrice(product?.price)}</p>
           <button>
             <BuyIcon />
           </button>
