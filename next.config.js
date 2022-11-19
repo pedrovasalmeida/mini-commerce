@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'thumbs.dreamstime.com',
+        hostname: 'fakestoreapi.com',
         port: '',
       },
     ],
