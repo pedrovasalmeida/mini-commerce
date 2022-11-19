@@ -23,7 +23,7 @@ export default function Home({ products }: HomeProps) {
       <Header />
       <main>
         <div className="pt-9">
-          <Gallery title="Recommended" products={products} />
+          <Gallery title="Recomendados" products={products} />
         </div>
       </main>
       <FooterMessage />
