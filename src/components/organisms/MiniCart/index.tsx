@@ -30,7 +30,7 @@ export function MiniCart() {
       </AnimatePresence>
 
       <motion.div
-        className={`flex fixed top-0 right-0 w-4/5 h-screen z-20 duration-500`}
+        className={`flex fixed top-0 right-0 w-4/5 max-w-[380px] h-screen z-20 duration-500`}
         initial="hidden"
         animate={isMiniCartOpen ? 'visible' : 'hidden'}
         variants={modalVariants}
