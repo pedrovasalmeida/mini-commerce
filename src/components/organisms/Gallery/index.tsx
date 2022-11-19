@@ -1,13 +1,16 @@
+import { Product } from '../../../types/Product'
 import { GalleryCard } from '../../molecules/GalleryCard'
 
 interface GalleryProps {
   title?: string | null
   showViewAllButton?: boolean
+  products?: Product[]
 }
 
 export function Gallery({
   title = null,
   showViewAllButton = true,
+  products = [],
 }: GalleryProps) {
   return (
     <div className="flex flex-col">
@@ -19,8 +22,8 @@ export function Gallery({
       </div>
 
       <div className="flex flex-wrap gap-4 justify-center">
-        {[0, 1, 2, 3].map((item) => (
-          <GalleryCard key={item} />
+        {products?.map((product) => (
+          <GalleryCard key={product?.id} product={product} />
         ))}
       </div>
     </div>
