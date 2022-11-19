@@ -1,11 +1,11 @@
-import { CartButton } from '../../atoms/CartButton'
 import { SearchBar } from '../../molecules/SearchBar'
+import { MiniCart } from '../MiniCart'
 
 export function Header() {
   return (
     <div className="flex">
       <SearchBar />
-      <CartButton />
+      <MiniCart />
     </div>
   )
 }

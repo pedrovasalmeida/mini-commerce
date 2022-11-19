@@ -1,6 +1,6 @@
 export function MiniCartFooter() {
   return (
-    <div className="flex flex-col h-auto mt-4">
+    <div className="flex flex-col h-auto mt-5">
       <div className="flex w-full items-center justify-between gap-4">
         <input
           className="p-3 w-3/5 rounded-lg text-sm outline-gray-900"
@@ -11,7 +11,7 @@ export function MiniCartFooter() {
         </button>
       </div>
 
-      <div className="flex flex-col w-full mt-8 gap-3">
+      <div className="flex flex-col w-full mt-8 gap-4">
         <div className="flex justify-between items-center w-full">
           <p className="text-gray-500 text-sm">Subtotal</p>
           <p className="text-gray-900 font-bold text-sm">R$ 999,9</p>
@@ -35,7 +35,7 @@ export function MiniCartFooter() {
         </div>
       </div>
 
-      <div className="flex items-center justify-center w-full mt-5">
+      <div className="flex items-center justify-center w-full mt-6">
         <button className="flex items-center justify-center w-full bg-green-600 font-bold text-gray-100 rounded-lg py-3">
           Ir para checkout
         </button>

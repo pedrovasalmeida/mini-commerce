@@ -4,7 +4,6 @@ import { FooterMessage } from '../components/atoms/FooterMessage'
 
 import { Gallery } from '../components/organisms/Gallery'
 import { Header } from '../components/organisms/Header'
-import { MiniCart } from '../components/organisms/MiniCart'
 import { api } from '../services/api'
 import { Product } from '../types/Product'
 
@@ -21,7 +20,6 @@ export default function Home({ products }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MiniCart />
       <Header />
       <main>
         <div className="pt-9">
