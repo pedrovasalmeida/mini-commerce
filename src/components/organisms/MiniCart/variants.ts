@@ -1,22 +1,35 @@
-export const modalVariants = {
+export const overlayVariants = {
   visible: {
-    opacity: 1,
-    height: '76%',
-    width: '85%',
-    overflow: 'hidden',
+    opacity: 0.7,
     transition: {
       ease: 'anticipate',
-      duration: 0.8,
+      duration: 0.7,
     },
   },
   hidden: {
     opacity: 0,
-    height: '0%',
-    width: '0%',
-    overflow: 'hidden',
     transition: {
       ease: 'anticipate',
-      duration: 0.6,
+      duration: 1,
+    },
+  },
+}
+
+export const modalVariants = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: 'anticipate',
+      duration: 0.5,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    x: '100%',
+    transition: {
+      ease: 'anticipate',
+      duration: 0.5,
     },
   },
 }

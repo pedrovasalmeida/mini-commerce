@@ -1,14 +1,10 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ProductModalHeader } from '../../molecules/ProductModalHeader'
 import { ProductModalImage } from '../../molecules/ProductModalImage'
 import { ProductPrice } from '../../molecules/ProductPrice'
 import { ProductQuantitySelector } from '../../molecules/ProductQuantitySelector'
 import { ProductSKUSelector } from '../../molecules/ProductSKUSelector'
-import {
-  modalContentVariants,
-  modalVariants,
-  overlayVariants,
-} from './variants'
+import { modalContentVariants, modalVariants } from './variants'
 
 interface ProductDetailsModalProps {
   isProductDetailOpen: boolean
@@ -21,13 +17,18 @@ export function ProductDetailsModal({
 }: ProductDetailsModalProps) {
   return (
     <>
-      <motion.div
-        className="bg-gray-900 bg-opacity-80 w-screen h-screen fixed top-0 bottom-0 left-0 right-0 m-auto z-10"
-        variants={overlayVariants}
-        initial="hidden"
-        animate={isProductDetailOpen ? 'visible' : 'hidden'}
-        onClick={toggleProductDetailModal}
-      />
+      <AnimatePresence>
+        {isProductDetailOpen && (
+          <motion.div
+            className="bg-zinc-900 w-screen h-screen fixed top-0 bottom-0 left-0 right-0 m-auto z-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.9 }}
+            exit={{ opacity: 0 }}
+            transition={{ ease: 'linear', duration: 0.7 }}
+            onClick={toggleProductDetailModal}
+          />
+        )}
+      </AnimatePresence>
       <motion.div
         className="fixed bg-gray-100 top-0 bottom-0 left-0 right-0 z-20 m-auto rounded-lg"
         variants={modalVariants}
