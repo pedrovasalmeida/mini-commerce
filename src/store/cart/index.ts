@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { cartReducers } from "./reducers"
-import { Cart } from "../../types/Cart"
+import { createSlice } from '@reduxjs/toolkit'
+import { cartReducers } from './reducers'
+import { Cart } from '../../types/Cart'
 
 const initialState: Cart = {
   items: [],
@@ -11,15 +11,15 @@ const initialState: Cart = {
     subTotal: 0,
     discounts: 0,
     total: 0,
-  }
+  },
 }
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: cartReducers
+  reducers: cartReducers,
 })
 
-export const { cleanCart } = cartSlice.actions;
+export const { cleanCart } = cartSlice.actions
 
-export default cartSlice.reducer;
+export default cartSlice.reducer
