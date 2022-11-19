@@ -16,14 +16,18 @@ export function GalleryCard({ product }: GalleryCardProps) {
           <p className="font-bold text-xs">{product?.rating?.rate}</p>
         </div>
       </div>
-      <Image
-        src="https://thumbs.dreamstime.com/b/flesh-kiwi-cut-ripe-orange-15553893.jpg"
-        alt="Product Image"
-        width={150}
-        height={120}
-        loading="lazy"
-        className="rounded-lg"
-      />
+
+      <div className="w-full h-44">
+        <Image
+          src={product?.image}
+          alt="Product Image"
+          width={150}
+          height={120}
+          loading="lazy"
+          className="rounded-lg w-full h-full object-contain"
+        />
+      </div>
+
       <div className="px-4">
         <h3 className="text-sm pt-3 line-clamp-1">{product?.title}</h3>
         <div className="flex justify-between mt-3 pb-5">

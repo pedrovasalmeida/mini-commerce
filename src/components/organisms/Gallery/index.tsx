@@ -17,7 +17,7 @@ export function Gallery({
       <div className="flex justify-between pb-6">
         <h2 className="font-bold text-lg">{title ?? ''}</h2>
         {showViewAllButton && (
-          <button className="text-green-500">View All</button>
+          <button className="text-green-500">Ver todos</button>
         )}
       </div>
 
