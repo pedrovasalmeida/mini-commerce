@@ -51,16 +51,19 @@ export function Gallery({
       <motion.div
         className="bg-gray-900 bg-opacity-80 w-screen h-screen fixed top-0 bottom-0 left-0 right-0 m-auto z-10"
         variants={overlayVariants}
+        initial="hidden"
         animate={isProductDetailOpen ? 'visible' : 'hidden'}
         onClick={toggleProductDetailModal}
       />
       <motion.div
         className="fixed bg-gray-100 top-0 bottom-0 left-0 right-0 z-20 m-auto rounded-lg"
         variants={modalVariants}
+        initial="hidden"
         animate={isProductDetailOpen ? 'visible' : 'hidden'}
       >
         <motion.div
           variants={modalContentVariants}
+          initial="hidden"
           animate={isProductDetailOpen ? 'visible' : 'hidden'}
           transition={{ duration: 1 }}
           className="w-full h-full bg-stone-100 rounded-lg flex flex-col relative"
@@ -85,7 +88,31 @@ export function Gallery({
             />
           </div>
 
-          <div className="w-full h-full px-4 flex flex-col mt-2">
+          <div className="flex px-4 mt-4 justify-start gap-4">
+            <button className="flex w-10 h-10 border border-gray-400 rounded-lg">
+              <img
+                src="https://fakeimg.pl/300x300"
+                alt="thumbnail"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </button>
+            <button className="flex w-10 h-10 border border-gray-400 rounded-lg">
+              <img
+                src="https://fakeimg.pl/300x300"
+                alt="thumbnail"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </button>
+            <button className="flex w-10 h-10 border border-gray-400 rounded-lg">
+              <img
+                src="https://fakeimg.pl/300x300"
+                alt="thumbnail"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </button>
+          </div>
+
+          <div className="w-full h-full px-4 flex flex-col mt-4">
             <div className="flex flex-col">
               <p className="font-medium text-lg leading-6 line-clamp-3">
                 Um nome bem grande para este produto supimpa muito top mesmo

@@ -19,17 +19,17 @@ export function GalleryCard({
     >
       <div className="absolute top-2 right-2 flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">
         <RatingStarIcon />
-        <p className="font-bold text-xs">{product?.rating?.rate}</p>
+        <p className="font-bold text-xs">4.9</p>
       </div>
 
       <div className="w-full h-44">
         <Image
-          src={product?.image}
+          src={product?.images[0]}
           alt="Product Image"
           width={150}
-          height={120}
+          height={150}
           loading="lazy"
-          className="rounded-lg w-full h-full object-contain"
+          className="rounded-lg w-full h-full object-cover"
         />
       </div>
 

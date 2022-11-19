@@ -22,7 +22,7 @@ export const overlayVariants = {
 export const modalVariants = {
   visible: {
     opacity: 1,
-    height: '70%',
+    height: '80%',
     width: '85%',
     overflow: 'hidden',
     transition: {

@@ -6,7 +6,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'fakestoreapi.com',
+        hostname: 'api.escuelajs.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.lorem.space',
+      },
+      {
+        protocol: 'https',
+        hostname: '*',
       },
     ],
   },

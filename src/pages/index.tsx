@@ -22,12 +22,10 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <Header />
-      <main>
-        <div className="pt-9">
-          <Suspense fallback={<div>Loading...</div>}>
-            <Gallery title="Recomendados" products={products} />
-          </Suspense>
-        </div>
+      <main className="py-9">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Gallery title="Recomendados" products={products} />
+        </Suspense>
       </main>
       <FooterMessage />
     </div>
@@ -36,7 +34,7 @@ export default function Home({ products }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
-    const response = await api.get('/products?limit=6')
+    const response = await api.get('/products?offset=0&limit=8')
 
     return {
       props: {
