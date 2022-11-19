@@ -2,8 +2,13 @@ import { Product } from '../../../types/Product'
 import { GalleryCard } from '../../molecules/GalleryCard'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { RatingStarIcon } from '../../atoms/Icons'
+import { Suspense, useState } from 'react'
+import { CloseIcon, RatingStarIcon } from '../../atoms/Icons'
+import {
+  modalContentVariants,
+  modalVariants,
+  overlayVariants,
+} from './variants'
 
 interface GalleryProps {
   title?: string | null
@@ -11,38 +16,12 @@ interface GalleryProps {
   products?: Product[]
 }
 
-const variants = {
-  visible: {
-    opacity: 1,
-    height: '70%',
-    width: '85%',
-  },
-  hidden: {
-    opacity: 0,
-    height: '0%',
-    width: '0%',
-  },
-}
-
-const overlayVariants = {
-  visible: {
-    opacity: 1,
-    height: '100%',
-    width: '100%',
-  },
-  hidden: {
-    opacity: 0,
-    height: '0%',
-    width: '0%',
-  },
-}
-
 export function Gallery({
   title = null,
   showViewAllButton = true,
   products = [],
 }: GalleryProps) {
-  const [isProductDetailOpen, setIsProductDetailOpen] = useState(true)
+  const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
 
   const toggleProductDetailModal = () => {
     setIsProductDetailOpen((current) => !current)
@@ -51,20 +30,22 @@ export function Gallery({
   return (
     <div className="flex flex-col">
       <div className="flex justify-between pb-6">
-        <h2 className="font-bold text-lg">{title ?? ''}</h2>
+        <div className="font-bold text-lg">{title ?? ''}</div>
         {showViewAllButton && (
           <button className="text-green-500">Ver todos</button>
         )}
       </div>
 
       <div className="flex flex-wrap gap-4 justify-center">
-        {products?.map((product) => (
-          <GalleryCard
-            key={product?.id}
-            product={product}
-            toggleProductDetailModal={toggleProductDetailModal}
-          />
-        ))}
+        <Suspense fallback={<div>Loading...</div>}>
+          {products?.map((product) => (
+            <GalleryCard
+              key={product?.id}
+              product={product}
+              toggleProductDetailModal={toggleProductDetailModal}
+            />
+          ))}
+        </Suspense>
       </div>
 
       <motion.div
@@ -75,67 +56,83 @@ export function Gallery({
       />
       <motion.div
         className="fixed bg-gray-100 top-0 bottom-0 left-0 right-0 z-20 m-auto rounded-lg"
-        variants={variants}
+        variants={modalVariants}
         animate={isProductDetailOpen ? 'visible' : 'hidden'}
       >
-        <div className="w-full h-full bg-stone-100 rounded-lg">
+        <motion.div
+          variants={modalContentVariants}
+          animate={isProductDetailOpen ? 'visible' : 'hidden'}
+          transition={{ duration: 1 }}
+          className="w-full h-full bg-stone-100 rounded-lg flex flex-col relative"
+        >
+          <button
+            className="absolute right-4 top-4 bg-stone-100 rounded-lg p-0.5 shadow"
+            onClick={toggleProductDetailModal}
+          >
+            <CloseIcon />
+          </button>
+
+          <div className=" absolute flex items-center justify-start text-center gap-1 bg-stone-100 w-auto h-auto p-1 px-2 rounded-lg top-4 left-4 shadow">
+            <RatingStarIcon />
+            <p className="font-bold text-sm">4.9</p>
+          </div>
+
           <div className="w-full h-auto">
             <img
               src="https://fakeimg.pl/500x500"
               alt="Foto do produto"
-              className="object-contain rounded-lg"
+              className="object-contain rounded-lg rounded-b-2xl"
             />
           </div>
 
-          <div className="w-full h-auto px-4">
-            <div className="flex items-center justify-start gap-1 bg-stone-100 h-auto">
-              <div className="flex gap-1 items-center justify-center">
-                <RatingStarIcon />
-                <p className="font-bold text-md">4.9</p>
+          <div className="w-full h-full px-4 flex flex-col mt-2">
+            <div className="flex flex-col">
+              <p className="font-medium text-lg leading-6 line-clamp-3">
+                Um nome bem grande para este produto supimpa muito top mesmo
+                esse produto Um nome bem grande para este produto supimpa muito
+                top mesmo esse produto
+              </p>
+              <div className="flex items-center gap-2 mt-2">
+                <p className="text-md text-gray-400 line-through">R$ 9999,00</p>
+                <p className="font-bold text-lg">R$ 9999,00</p>
               </div>
-              <p className="text-xs italic text-gray-400">(84)</p>
             </div>
 
-            <div className="flex flex-col">
-              <p className="font-medium text-lg">Nome do produto</p>
-              <p className="font-bold">R$ 100,00</p>
-            </div>
-
-            <div className="flex flex-col">
+            <div className="flex flex-col mt-2">
               <p className="font-bold text-sm">Selecione o tamanho</p>
-              <div className="flex gap-4">
+              <div className="flex gap-4 mt-2">
                 <button className="border border-green-400  bg-green-400 p-1 px-3 rounded-lg text-gray-900 font-bold">
-                  P
+                  <p>P</p>
                 </button>
                 <button className="border border-gray-300 p-1 px-3 rounded-lg text-gray-900 font-bold">
-                  M
+                  <p>M</p>
                 </button>
                 <button className="border border-gray-300 p-1 px-3 rounded-lg text-gray-900 font-bold">
-                  G
+                  <p>G</p>
                 </button>
                 <button className="border border-gray-300 p-1 px-3 rounded-lg text-gray-900 font-bold">
-                  GG
+                  <p>GG</p>
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="flex px-4 gap-4">
-            <div className="flex w-2/6 items-center justify-center gap-2 bg-zinc-300 rounded-lg">
-              <button className="p-1 px-3 border border-gray-400 bg-gray-100 rounded-lg">
-                -
-              </button>
+          <div className="flex px-4 gap-4 mt-auto mb-5">
+            <div className="flex w-auto items-center justify-center gap-2 bg-gray-300 rounded-lg p-1">
+              <div className="p-1 px-3 border border-gray-400 bg-gray-100 rounded-lg">
+                <p>-</p>
+              </div>
               <span>2</span>
-              <button className="p-1 px-3 border border-gray-400 bg-gray-100 rounded-lg">
-                +
-              </button>
+              <div className="p-1 px-3 border border-gray-400 bg-gray-100 rounded-lg">
+                <p>+</p>
+              </div>
             </div>
 
-            <button className="flex flex-grow bg-green-600 py-2 items-center justify-center rounded-lg font-bold text-gray-100 text-sm">
-              Adicionar ao carrinho
+            <button className="flex flex-grow bg-green-600 items-center justify-center rounded-lg font-bold text-gray-100 text-sm">
+              <p>Adicionar ao carrinho</p>
             </button>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   )

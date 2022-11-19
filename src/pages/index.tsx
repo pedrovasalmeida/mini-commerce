@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
+import { Suspense } from 'react'
 import { FooterMessage } from '../components/atoms/FooterMessage'
 
 import { Gallery } from '../components/organisms/Gallery'
@@ -23,7 +24,9 @@ export default function Home({ products }: HomeProps) {
       <Header />
       <main>
         <div className="pt-9">
-          <Gallery title="Recomendados" products={products} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Gallery title="Recomendados" products={products} />
+          </Suspense>
         </div>
       </main>
       <FooterMessage />
