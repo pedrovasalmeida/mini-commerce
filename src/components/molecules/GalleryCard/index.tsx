@@ -5,11 +5,18 @@ import { BuyIcon, RatingStarIcon } from '../../atoms/Icons'
 
 interface GalleryCardProps {
   product: Product
+  toggleProductDetailModal: () => void
 }
 
-export function GalleryCard({ product }: GalleryCardProps) {
+export function GalleryCard({
+  product,
+  toggleProductDetailModal,
+}: GalleryCardProps) {
   return (
-    <div className="relative flex flex-col shadow-md bg-gray-50 rounded-lg w-[183px]">
+    <button
+      className="relative flex flex-col shadow-md bg-gray-50 rounded-lg w-[183px] text-start"
+      onClick={toggleProductDetailModal}
+    >
       <div className="absolute top-2 right-2">
         <div className="flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">
           <RatingStarIcon />
@@ -37,6 +44,6 @@ export function GalleryCard({ product }: GalleryCardProps) {
           </button>
         </div>
       </div>
-    </div>
+    </button>
   )
 }
