@@ -15,7 +15,6 @@ body {
 
   height: auto;
 
-  @apply p-2;
   @apply text-gray-900;
   @apply bg-stone-100;
 }

@@ -1,8 +1,8 @@
 export const modalVariants = {
   visible: {
     opacity: 1,
-    height: '76%',
     width: '85%',
+    maxHeight: 'unset',
     overflow: 'hidden',
     transition: {
       ease: 'anticipate',
@@ -11,7 +11,7 @@ export const modalVariants = {
   },
   hidden: {
     opacity: 0,
-    height: '0%',
+    maxHeight: '0%',
     width: '0%',
     overflow: 'hidden',
     transition: {

@@ -1,6 +1,6 @@
 export function ProductSKUSelector() {
   return (
-    <div className="flex flex-col mt-2">
+    <div className="flex flex-col mt-4">
       <p className="font-bold text-sm">Selecione o tamanho</p>
       <div className="flex gap-4 mt-2">
         <button className="border border-green-400  bg-green-400 p-1 px-3 rounded-lg">

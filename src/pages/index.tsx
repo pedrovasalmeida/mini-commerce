@@ -22,7 +22,7 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <Header />
-      <main className="py-9">
+      <main className="py-9 px-2">
         <Suspense fallback={<div>Loading...</div>}>
           <Gallery title="Recomendados" products={products} />
         </Suspense>

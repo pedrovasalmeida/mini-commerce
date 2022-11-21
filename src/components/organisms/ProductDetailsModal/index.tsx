@@ -30,7 +30,7 @@ export function ProductDetailsModal({
         )}
       </AnimatePresence>
       <motion.div
-        className="fixed bg-gray-100 top-0 bottom-0 left-0 right-0 z-20 m-auto rounded-lg"
+        className="fixed bg-gray-100 top-1/2 -translate-y-1/2 left-0 right-0 z-20 m-auto rounded-lg"
         variants={modalVariants}
         initial="hidden"
         animate={isProductDetailOpen ? 'visible' : 'hidden'}
@@ -40,7 +40,7 @@ export function ProductDetailsModal({
           initial="hidden"
           animate={isProductDetailOpen ? 'visible' : 'hidden'}
           transition={{ duration: 1 }}
-          className="w-full h-full bg-stone-100 rounded-lg flex flex-col relative"
+          className="w-full h-full bg-stone-100 rounded-lg flex flex-col relative justify-center items-center lg:flex-row"
         >
           <ProductModalHeader
             toggleProductDetailModal={toggleProductDetailModal}
@@ -61,11 +61,13 @@ export function ProductDetailsModal({
             <ProductSKUSelector />
           </div>
 
-          <div className="flex px-4 gap-4 mt-auto mb-5">
+          <div className="flex px-4 gap-4 mt-8 mb-5">
             <ProductQuantitySelector />
 
-            <button className="flex flex-grow bg-green-600 items-center justify-center rounded-lg font-bold text-gray-100 text-sm">
-              <p>Adicionar ao carrinho</p>
+            <button className="flex flex-grow bg-green-600 items-center justify-center rounded-lg">
+              <p className="font-bold text-gray-100 text-xs">
+                Adicionar ao carrinho
+              </p>
             </button>
           </div>
         </motion.div>
