@@ -22,6 +22,10 @@ export function Gallery({
     setIsProductDetailOpen((current) => !current)
   }
 
+  const closeModal = () => {
+    setIsProductDetailOpen(false)
+  }
+
   return (
     <div className="flex flex-col justify-start align-center">
       <div className="flex justify-start gap-10 items-center pb-6 w-full">
@@ -47,7 +51,7 @@ export function Gallery({
 
       <ProductDetailsModal
         isProductDetailOpen={isProductDetailOpen}
-        toggleProductDetailModal={toggleProductDetailModal}
+        closeModal={closeModal}
       />
     </div>
   )

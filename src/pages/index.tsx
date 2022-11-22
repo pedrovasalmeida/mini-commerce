@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { Suspense } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 import { FooterMessage } from '../components/atoms/FooterMessage'
 
 import { Gallery } from '../components/organisms/Gallery'
@@ -9,10 +9,34 @@ import { api } from '../services/api'
 import { Product } from '../types/Product'
 
 interface HomeProps {
-  products: Product[]
+  productsFromApi: Product[]
 }
 
-export default function Home({ products }: HomeProps) {
+export default function Home({ productsFromApi }: HomeProps) {
+  const [products, setProducts] = useState<Product[]>([])
+
+  const searchTermInProducts = useCallback(
+    (term: string) => {
+      if (term.length <= 0) {
+        setProducts(productsFromApi)
+      } else {
+        const productsFiltered = productsFromApi.filter((product) => {
+          return (
+            product.title.toLowerCase().includes(term) ||
+            product.description.toLowerCase().includes(term)
+          )
+        })
+
+        setProducts(productsFiltered)
+      }
+    },
+    [productsFromApi],
+  )
+
+  useEffect(() => {
+    setProducts(productsFromApi)
+  }, [productsFromApi])
+
   return (
     <div>
       <Head>
@@ -21,7 +45,7 @@ export default function Home({ products }: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header searchTermInProducts={searchTermInProducts} />
       <main className="py-9 px-2 max-w-5xl mx-auto">
         <Suspense fallback={<div>Loading...</div>}>
           <Gallery title="Recomendados" products={products} />
@@ -38,14 +62,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
       props: {
-        products: response.data,
+        productsFromApi: response.data,
       },
       revalidate: 60 * 60 * 12, // 12 hours
     }
   } catch {
     return {
       props: {
-        products: [],
+        productsFromApi: [],
       },
     }
   }

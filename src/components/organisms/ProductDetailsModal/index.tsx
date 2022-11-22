@@ -3,12 +3,12 @@ import { ProductModalContainer } from '../../molecules/ProductModalContainer'
 
 interface ProductDetailsModalProps {
   isProductDetailOpen: boolean
-  toggleProductDetailModal: () => void
+  closeModal: () => void
 }
 
 export function ProductDetailsModal({
   isProductDetailOpen,
-  toggleProductDetailModal,
+  closeModal,
 }: ProductDetailsModalProps) {
   return (
     <>
@@ -20,13 +20,13 @@ export function ProductDetailsModal({
             animate={{ opacity: 0.9 }}
             exit={{ opacity: 0 }}
             transition={{ ease: 'linear', duration: 0.7 }}
-            onClick={toggleProductDetailModal}
+            onClick={closeModal}
           />
         )}
       </AnimatePresence>
       <ProductModalContainer
         isProductDetailOpen={isProductDetailOpen}
-        toggleProductDetailModal={toggleProductDetailModal}
+        toggleProductDetailModal={closeModal}
       />
     </>
   )
