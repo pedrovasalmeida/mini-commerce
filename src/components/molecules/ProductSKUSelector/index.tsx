@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const availableSKUs = ['P', 'M', 'G', 'GG']
 
@@ -8,6 +8,10 @@ export function ProductSKUSelector() {
   const handleSelectSku = (sku: string) => {
     setSelectedSku(sku)
   }
+
+  useEffect(() => {
+    setSelectedSku('P')
+  }, [])
 
   return (
     <div className="flex flex-col mt-4">

@@ -24,14 +24,16 @@ export function Gallery({
 
   return (
     <div className="flex flex-col justify-start align-center">
-      <div className="flex justify-between pb-6 w-full max-w-[416px]">
+      <div className="flex justify-start gap-10 items-center pb-6 w-full">
         <div className="font-bold text-lg">{title ?? ''}</div>
         {showViewAllButton && (
-          <button className="text-green-500">Ver todos</button>
+          <button className="text-green-500 text-sm font-bold underline">
+            Ver todos
+          </button>
         )}
       </div>
 
-      <div className="flex flex-wrap gap-2 justify-center">
+      <div className="flex flex-wrap gap-6 justify-start items-center">
         <Suspense fallback={<div>Loading...</div>}>
           {products?.map((product) => (
             <GalleryCard

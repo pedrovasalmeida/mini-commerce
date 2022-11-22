@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export function ProductQuantitySelector() {
   const [quantity, setQuantity] = useState(1)
@@ -10,6 +10,10 @@ export function ProductQuantitySelector() {
   const handleDecrement = () => {
     setQuantity((current) => (current <= 1 ? 1 : current - 1))
   }
+
+  useEffect(() => {
+    setQuantity(1)
+  }, [])
 
   return (
     <div className="flex w-auto items-center justify-center gap-2 bg-zinc-200 rounded-lg p-1">
