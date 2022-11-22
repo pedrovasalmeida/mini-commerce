@@ -1,20 +1,33 @@
+import { useState } from 'react'
+
+const availableSKUs = ['P', 'M', 'G', 'GG']
+
 export function ProductSKUSelector() {
+  const [selectedSku, setSelectedSku] = useState('P')
+
+  const handleSelectSku = (sku: string) => {
+    setSelectedSku(sku)
+  }
+
   return (
     <div className="flex flex-col mt-4">
       <p className="font-bold text-sm">Selecione o tamanho</p>
       <div className="flex gap-4 mt-2">
-        <button className="border border-green-400  bg-green-400 p-1 px-3 rounded-lg">
-          <p className=" text-gray-900 font-bold text-sm">P</p>
-        </button>
-        <button className="border border-gray-300 p-1 px-3 rounded-lg">
-          <p className=" text-gray-900 font-bold text-sm">M</p>
-        </button>
-        <button className="border border-gray-300 p-1 px-3 rounded-lg">
-          <p className=" text-gray-900 font-bold text-sm">G</p>
-        </button>
-        <button className="border border-gray-300 p-1 px-3 rounded-lg">
-          <p className=" text-gray-900 font-bold text-sm">GG</p>
-        </button>
+        {availableSKUs.map((sku) => (
+          <button
+            key={sku}
+            onClick={() => handleSelectSku(sku)}
+            className={`border border-gray-300 p-1 px-3 rounded-lg transition-all duration-400 ease ${
+              selectedSku === sku?.toUpperCase()
+                ? 'bg-green-500 border-green-600'
+                : ''
+            }`}
+          >
+            <p className=" text-gray-900 font-bold text-sm">
+              {sku?.toUpperCase()}
+            </p>
+          </button>
+        ))}
       </div>
     </div>
   )
