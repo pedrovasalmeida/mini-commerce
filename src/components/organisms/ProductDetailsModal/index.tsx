@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { ProductModalContainer } from '../../molecules/ProductModalContainer'
+import { ProductModalContainer } from '../../organisms/ProductModalContainer'
 import { Product } from '../../../types/Product'
 
 interface ProductDetailsModalProps {
