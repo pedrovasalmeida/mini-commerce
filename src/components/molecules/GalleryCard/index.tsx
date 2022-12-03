@@ -20,7 +20,7 @@ export function GalleryCard({
 
   return (
     <div
-      className="relative flex flex-col shadow-md bg-gray-50 rounded-lg text-start w-full xs:w-[47%] sm:w-[30%] md:w-[22%] cursor-pointer"
+      className="relative flex flex-col shadow-md bg-gray-50 rounded-lg text-start w-full xs:w-[46%] sm:w-[30%] md:w-[22%] cursor-pointer"
       onClick={handleProductCardClick}
     >
       <div className="absolute top-2 right-2 flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">
@@ -43,9 +43,9 @@ export function GalleryCard({
         <h3 className="text-sm pt-3 line-clamp-1">{product?.title}</h3>
         <div className="flex justify-between mt-3 pb-5">
           <div className="font-bold">{formatPrice(product?.price)}</div>
-          <button>
+          <div>
             <BuyIcon />
-          </button>
+          </div>
         </div>
       </div>
     </div>

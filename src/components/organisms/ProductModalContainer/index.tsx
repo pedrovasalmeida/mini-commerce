@@ -7,6 +7,7 @@ import { ProductQuantitySelector } from '../../molecules/ProductQuantitySelector
 import { ProductSKUSelector } from '../../molecules/ProductSKUSelector'
 import { modalVariants } from '../../organisms/ProductDetailsModal/variants'
 import { Product } from '../../../types/Product'
+import { ProductModalAddToCartButton } from '../../atoms/ProductModalAddToCartButton'
 
 interface ProductModalContainerProps {
   isProductDetailOpen: boolean
@@ -50,11 +51,7 @@ export function ProductModalContainer({
         <div className="flex px-4 gap-4 mt-8 mb-5">
           <ProductQuantitySelector />
 
-          <button className="flex flex-grow bg-green-600 items-center justify-center rounded-lg">
-            <p className="font-bold text-gray-100 text-xs">
-              Adicionar ao carrinho
-            </p>
-          </button>
+          <ProductModalAddToCartButton product={product} />
         </div>
       </div>
     </motion.div>

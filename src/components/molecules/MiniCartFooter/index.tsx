@@ -1,4 +1,13 @@
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../store'
+import { formatPrice } from '../../../utils/handlePrice'
+
 export function MiniCartFooter() {
+  const { info, totalItemsCount } = useSelector(
+    (state: RootState) => state.cart,
+  )
+  const { subTotal, discounts, shipping, total } = info
+
   return (
     <div className="flex flex-col h-auto mt-8">
       <div className="flex w-full items-center justify-between gap-4">
@@ -14,17 +23,23 @@ export function MiniCartFooter() {
       <div className="flex flex-col w-full mt-8 gap-4">
         <div className="flex justify-between items-center w-full">
           <p className="text-gray-500 text-sm">Subtotal</p>
-          <p className="text-gray-900 font-bold text-sm">R$ 999,9</p>
+          <p className="text-gray-900 font-bold text-sm">
+            {formatPrice(subTotal ?? 0)}
+          </p>
         </div>
 
         <div className="flex justify-between items-center w-full">
           <p className="text-gray-500 text-sm">Desconto</p>
-          <p className="text-green-600 font-bold text-sm">- R$ 0,00</p>
+          <p className="text-green-600 font-bold text-sm">
+            - {formatPrice(discounts ?? 0)}
+          </p>
         </div>
 
         <div className="flex justify-between items-center w-full">
           <p className="text-gray-500 text-sm">Frete</p>
-          <p className="text-gray-900 font-bold text-sm">Grátis</p>
+          <p className="text-gray-900 font-bold text-sm">
+            {formatPrice(shipping ?? 0)}
+          </p>
         </div>
 
         <div id="separator" className="h-px w-full bg-gray-300" />
@@ -32,9 +47,16 @@ export function MiniCartFooter() {
         <div className="flex justify-between items-center w-full">
           <div className="flex gap-1 items-center">
             <p className="text-gray-900 font-bold text-sm">Total</p>
-            <p className="text-xs text-gray-900 italic">(12 itens)</p>
+            {totalItemsCount >= 1 && (
+              <p className="text-[10px] text-gray-900 italic">
+                ({totalItemsCount ?? 0}{' '}
+                {totalItemsCount > 1 ? 'unidades' : 'unidade'})
+              </p>
+            )}
           </div>
-          <p className="text-gray-900 font-bold text-sm">R$ 999,99</p>
+          <p className="text-gray-900 font-bold text-sm">
+            {formatPrice(total ?? 0)}
+          </p>
         </div>
       </div>
 
