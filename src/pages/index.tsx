@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 import { FooterMessage } from '../components/atoms/FooterMessage'
@@ -60,7 +60,7 @@ export default function Home({ productsFromApi }: HomeProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   try {
     const response = await api.get('/products?offset=0&limit=20')
 
@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       props: {
         productsFromApi: response.data,
       },
-      revalidate: 60 * 60 * 12, // 12 hours
+      // revalidate: 60 * 60 * 12, // 12 hours
     }
   } catch {
     return {
