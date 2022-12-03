@@ -14,7 +14,7 @@ export function GalleryCard({
 }: GalleryCardProps) {
   return (
     <div
-      className="relative flex flex-col shadow-md bg-gray-50 rounded-lg text-start w-full xs:w-[47%] sm:w-[30%] md:w-[22%]"
+      className="relative flex flex-col shadow-md bg-gray-50 rounded-lg text-start w-full xs:w-[47%] sm:w-[30%] md:w-[22%] cursor-pointer"
       onClick={toggleProductDetailModal}
     >
       <div className="absolute top-2 right-2 flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">

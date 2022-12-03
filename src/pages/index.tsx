@@ -48,7 +48,11 @@ export default function Home({ productsFromApi }: HomeProps) {
       <Header searchTermInProducts={searchTermInProducts} />
       <main className="py-9 px-2 max-w-5xl mx-auto">
         <Suspense fallback={<div>Loading...</div>}>
-          <Gallery title="Recomendados" products={products} />
+          <Gallery
+            title="Recomendados"
+            products={products}
+            showViewAllButton={false}
+          />
         </Suspense>
       </main>
       <FooterMessage />
