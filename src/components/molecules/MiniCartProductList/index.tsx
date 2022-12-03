@@ -21,7 +21,9 @@ export function MiniCartProductList({ items }: MiniCartProductListProps) {
         ))}
 
       {items?.length > 0 &&
-        items?.map((item) => <MiniCartProductCard key={item?.id} />)}
+        items?.map((item) => (
+          <MiniCartProductCard key={item?.id} product={item} />
+        ))}
     </div>
   )
 }
