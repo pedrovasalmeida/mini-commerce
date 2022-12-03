@@ -17,6 +17,7 @@ export function Gallery({
   products = [],
 }: GalleryProps) {
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false)
+  const [productSelected, setProductSelected] = useState<Product | null>(null)
 
   const toggleProductDetailModal = () => {
     setIsProductDetailOpen((current) => !current)
@@ -44,6 +45,7 @@ export function Gallery({
               key={product?.id}
               product={product}
               toggleProductDetailModal={toggleProductDetailModal}
+              setProductSelected={setProductSelected}
             />
           ))}
         </Suspense>
@@ -52,6 +54,7 @@ export function Gallery({
       <ProductDetailsModal
         isProductDetailOpen={isProductDetailOpen}
         closeModal={closeModal}
+        product={productSelected}
       />
     </div>
   )

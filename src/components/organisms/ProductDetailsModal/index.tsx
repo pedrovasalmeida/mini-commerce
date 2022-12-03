@@ -1,14 +1,17 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { ProductModalContainer } from '../../molecules/ProductModalContainer'
+import { Product } from '../../../types/Product'
 
 interface ProductDetailsModalProps {
   isProductDetailOpen: boolean
   closeModal: () => void
+  product: Product | null
 }
 
 export function ProductDetailsModal({
   isProductDetailOpen,
   closeModal,
+  product,
 }: ProductDetailsModalProps) {
   return (
     <>
@@ -27,6 +30,7 @@ export function ProductDetailsModal({
       <ProductModalContainer
         isProductDetailOpen={isProductDetailOpen}
         toggleProductDetailModal={closeModal}
+        product={product}
       />
     </>
   )

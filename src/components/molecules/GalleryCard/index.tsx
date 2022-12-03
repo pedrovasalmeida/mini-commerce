@@ -1,21 +1,27 @@
 import Image from 'next/image'
-import { Product } from '../../../types/Product'
-import { formatPrice } from '../../../utils/handlePrice'
 import { BuyIcon, RatingStarIcon } from '../../atoms/Icons'
+import { formatPrice } from '../../../utils/handlePrice'
+import { Product } from '../../../types/Product'
 
 interface GalleryCardProps {
   product: Product
   toggleProductDetailModal: () => void
+  setProductSelected: (product: Product) => void
 }
 
 export function GalleryCard({
   product,
   toggleProductDetailModal,
+  setProductSelected,
 }: GalleryCardProps) {
+  const handleProductCardClick = async () => {
+    await Promise.all([setProductSelected(product), toggleProductDetailModal()])
+  }
+
   return (
     <div
       className="relative flex flex-col shadow-md bg-gray-50 rounded-lg text-start w-full xs:w-[47%] sm:w-[30%] md:w-[22%] cursor-pointer"
-      onClick={toggleProductDetailModal}
+      onClick={handleProductCardClick}
     >
       <div className="absolute top-2 right-2 flex gap-2 items-center justify-center bg-gray-50 shadow w-auto px-2 py-1 rounded-lg">
         <RatingStarIcon />
