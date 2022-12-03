@@ -1,18 +1,22 @@
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { CartButton } from '../../atoms/CartButton'
 import { MiniCartHeader } from '../../molecules/MiniCartHeader'
 import { MiniCartProductList } from '../../molecules/MiniCartProductList'
 import { MiniCartFooter } from '../../molecules/MiniCartFooter'
-import { useState } from 'react'
-import { CartButton } from '../../atoms/CartButton'
 
-import { motion, AnimatePresence } from 'framer-motion'
 import { modalVariants } from './variants'
 
 export function MiniCart() {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false)
 
-  const toggleMiniCartVisibility = () => {
-    setIsMiniCartOpen((current) => !current)
-  }
+  useEffect(() => {
+    if (isMiniCartOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMiniCartOpen])
 
   return (
     <>
@@ -24,7 +28,7 @@ export function MiniCart() {
             animate={{ opacity: 0.7 }}
             transition={{ ease: 'linear', duration: 1 }}
             exit={{ opacity: 0 }}
-            onClick={toggleMiniCartVisibility}
+            onClick={() => setIsMiniCartOpen(false)}
           />
         )}
       </AnimatePresence>
@@ -41,7 +45,7 @@ export function MiniCart() {
           <MiniCartFooter />
         </div>
       </motion.div>
-      <CartButton toggleMiniCartVisibility={toggleMiniCartVisibility} />
+      <CartButton openMiniCart={() => setIsMiniCartOpen(true)} />
     </>
   )
 }
