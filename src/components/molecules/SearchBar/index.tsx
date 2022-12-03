@@ -11,7 +11,6 @@ export function SearchBar({ searchTermInProducts }: SearchBarProps) {
 
   const searchProducts = () => {
     searchTermInProducts(inputRef?.current?.value ?? '')
-    console.log('rodou')
   }
 
   const debounce = useDebounce(searchProducts)
