@@ -6,15 +6,18 @@ import { ProductPrice } from '../../molecules/ProductPrice'
 import { ProductQuantitySelector } from '../../molecules/ProductQuantitySelector'
 import { ProductSKUSelector } from '../../molecules/ProductSKUSelector'
 import { modalVariants } from '../../organisms/ProductDetailsModal/variants'
+import { Product } from '../../../types/Product'
 
 interface ProductModalContainerProps {
   isProductDetailOpen: boolean
   toggleProductDetailModal: () => void
+  product: Product | null
 }
 
 export function ProductModalContainer({
   isProductDetailOpen,
   toggleProductDetailModal,
+  product,
 }: ProductModalContainerProps) {
   return (
     <motion.div
@@ -25,17 +28,20 @@ export function ProductModalContainer({
     >
       <ProductModalHeader toggleProductDetailModal={toggleProductDetailModal} />
 
-      <ProductModalImage />
+      <ProductModalImage url={product?.images[0] ?? null} />
 
       <div className="flex flex-col w-full h-full mt-auto">
         <div className="w-full h-full px-4 flex flex-col mt-4">
           <div className="flex flex-col">
-            <p className="font-medium text-lg leading-6 line-clamp-3">
-              Um nome bem grande para este produto supimpa muito top mesmo esse
-              produto Um nome bem grande para este produto supimpa muito top
-              mesmo esse produto
+            <p className="font-medium text-lg leading-6 line-clamp-3 w-10/12">
+              {product?.title ??
+                'Houve um problema ao carregar o nome desse produto. :('}
             </p>
-            <ProductPrice />
+            <p className="font-medium text-xs leading-6 line-clamp-4 mt-2">
+              {product?.description ??
+                'Houve um problema ao carregar a descrição desse produto. :('}
+            </p>
+            <ProductPrice price={product?.price ?? null} />
           </div>
 
           <ProductSKUSelector />

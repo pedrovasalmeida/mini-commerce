@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useDebounce } from '../../../hooks/useDebounce'
 import { SearchIcon } from '../../atoms/Icons'
 
 interface SearchBarProps {
@@ -8,11 +9,18 @@ interface SearchBarProps {
 export function SearchBar({ searchTermInProducts }: SearchBarProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const searchProducts = () => {
+    searchTermInProducts(inputRef?.current?.value ?? '')
+  }
+
+  const debounce = useDebounce(searchProducts)
+
   return (
     <div className="relative flex w-full">
       <input
         type="text"
         ref={inputRef}
+        onKeyUp={debounce}
         onChange={(e) => {
           if (e.target.value.length <= 0) {
             searchTermInProducts('')

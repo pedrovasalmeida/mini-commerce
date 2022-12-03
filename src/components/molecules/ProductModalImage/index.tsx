@@ -1,9 +1,13 @@
-export function ProductModalImage() {
+interface ProductModalImageProps {
+  url: string | null
+}
+
+export function ProductModalImage({ url }: ProductModalImageProps) {
   return (
     <>
       <div className="w-full h-auto">
         <img
-          src="https://fakeimg.pl/300x300"
+          src={url ?? 'https://fakeimg.pl/300x300'}
           alt="Foto do produto"
           className="object-cover rounded-lg rounded-b-2xl w-full h-80 md:w-96 md:h-full"
         />
