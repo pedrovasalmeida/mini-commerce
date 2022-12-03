@@ -6,9 +6,12 @@ import { MiniCartProductList } from '../../molecules/MiniCartProductList'
 import { MiniCartFooter } from '../../molecules/MiniCartFooter'
 
 import { modalVariants } from './variants'
+import { RootState } from '../../../store'
+import { useSelector } from 'react-redux'
 
 export function MiniCart() {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false)
+  const { items } = useSelector((state: RootState) => state.cart)
 
   useEffect(() => {
     if (isMiniCartOpen) {
@@ -40,9 +43,12 @@ export function MiniCart() {
         variants={modalVariants}
       >
         <div className="flex right-0 flex-col ml-auto w-full h-full z-20 bg-gray-200 p-6">
-          <MiniCartHeader closeMiniCart={() => setIsMiniCartOpen(false)} />
-          <MiniCartProductList />
-          <MiniCartFooter />
+          <MiniCartHeader
+            closeMiniCart={() => setIsMiniCartOpen(false)}
+            items={items}
+          />
+          <MiniCartProductList items={items ?? []} />
+          {!!items && items?.length > 0 && <MiniCartFooter />}
         </div>
       </motion.div>
       <CartButton openMiniCart={() => setIsMiniCartOpen(true)} />
