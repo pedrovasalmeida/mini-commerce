@@ -40,7 +40,7 @@ export function MiniCart() {
         variants={modalVariants}
       >
         <div className="flex right-0 flex-col ml-auto w-full h-full z-20 bg-gray-200 p-6">
-          <MiniCartHeader />
+          <MiniCartHeader closeMiniCart={() => setIsMiniCartOpen(false)} />
           <MiniCartProductList />
           <MiniCartFooter />
         </div>

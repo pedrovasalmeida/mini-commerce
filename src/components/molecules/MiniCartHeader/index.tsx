@@ -1,9 +1,13 @@
 import { ArrowBackIcon } from '../../atoms/Icons'
 
-export function MiniCartHeader() {
+interface MiniCartHeaderProps {
+  closeMiniCart: () => void
+}
+
+export function MiniCartHeader({ closeMiniCart }: MiniCartHeaderProps) {
   return (
     <div className="flex items-center justify-between">
-      <button>
+      <button onClick={closeMiniCart}>
         <ArrowBackIcon />
       </button>
       <h2 className="font-bold text-lg">Meu carrinho</h2>
