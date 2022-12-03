@@ -3,11 +3,11 @@ import { Cart, CartItems } from '../../types/Cart'
 import { Product } from '../../types/Product'
 
 const calculateCartTotalItems = (items: CartItems[]) => {
-  return items.reduce((acc, item) => acc + item?.quantity, 0) ?? 0
+  return items?.reduce((acc, item) => acc + item?.quantity, 0) ?? 0
 }
 
 const calculateCartUniqueItems = (items: CartItems[]) => {
-  return items.length ?? 0
+  return items?.length ?? 0
 }
 
 const generateRandomShippingValue = () => {
@@ -22,7 +22,7 @@ const generateCartInfo = (state: Cart, newCartItems: CartItems[]) => {
   const newCartInfoRandomShippingValue = generateRandomShippingValue()
   const newCartInfoDiscounts = generateRandomDiscountValue()
   const newCartInfoSubtotal = newCartItems.reduce(
-    (acc, item) => acc + item.price,
+    (acc, item) => item.price * item?.quantity + acc,
     0,
   )
   const newCartInfoTotal =
@@ -64,7 +64,7 @@ export const cartReducers = {
 
     state.items = newCartItems
     state.totalItemsCount = calculateCartTotalItems(newCartItems)
-    state.totalItemsCount = calculateCartUniqueItems(newCartItems)
+    state.uniqueItemsCount = calculateCartUniqueItems(newCartItems)
     state.info = generateCartInfo(state, newCartItems)
   },
 
@@ -91,7 +91,7 @@ export const cartReducers = {
 
     state.items = newCartItems
     state.totalItemsCount = calculateCartTotalItems(newCartItems)
-    state.totalItemsCount = calculateCartUniqueItems(newCartItems)
+    state.uniqueItemsCount = calculateCartUniqueItems(newCartItems)
     state.info = generateCartInfo(state, newCartItems)
   },
 
@@ -123,7 +123,7 @@ export const cartReducers = {
 
     state.items = newCartItems
     state.totalItemsCount = calculateCartTotalItems(newCartItems)
-    state.totalItemsCount = calculateCartUniqueItems(newCartItems)
+    state.uniqueItemsCount = calculateCartUniqueItems(newCartItems)
     state.info = generateCartInfo(state, newCartItems)
   },
 
@@ -140,14 +140,12 @@ export const cartReducers = {
 
     state.items = newCartItems
     state.totalItemsCount = calculateCartTotalItems(newCartItems)
-    state.totalItemsCount = calculateCartUniqueItems(newCartItems)
+    state.uniqueItemsCount = calculateCartUniqueItems(newCartItems)
     state.info = generateCartInfo(state, newCartItems)
   },
 
-  cleanCart: (state: Cart) => {
-    const emptyCartItems: CartItems[] = []
-
-    state.items = emptyCartItems
+  clearCart: (state: Cart) => {
+    state.items = []
     state.totalItemsCount = 0
     state.uniqueItemsCount = 0
     state.info = {

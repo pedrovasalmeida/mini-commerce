@@ -21,7 +21,7 @@ export const cartSlice = createSlice({
 })
 
 export const {
-  cleanCart,
+  clearCart,
   addProductToCart,
   decreaseProductQuantity,
   increaseProductQuantity,
