@@ -1,3 +1,4 @@
+import { Login } from '../../molecules/LoginButton'
 import { SearchBar } from '../../molecules/SearchBar'
 import { MiniCart } from '../MiniCart'
 
@@ -12,6 +13,7 @@ export function Header({ searchTermInProducts }: HeaderProps) {
         <SearchBar searchTermInProducts={searchTermInProducts} />
       </div>
       <div className="flex ml-auto lg:pr-6">
+        <Login />
         <MiniCart />
       </div>
     </div>
