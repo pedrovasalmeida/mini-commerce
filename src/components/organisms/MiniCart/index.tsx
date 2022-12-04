@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CartButton } from '../../atoms/CartButton'
 import { MiniCartHeader } from '../../molecules/MiniCartHeader'
@@ -7,7 +8,6 @@ import { MiniCartFooter } from '../../molecules/MiniCartFooter'
 
 import { modalVariants } from './variants'
 import { RootState } from '../../../store'
-import { useSelector } from 'react-redux'
 
 export function MiniCart() {
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false)

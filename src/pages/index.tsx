@@ -40,7 +40,7 @@ export default function Home({ productsFromApi }: HomeProps) {
   return (
     <div>
       <Head>
-        <title>[PH] My Commerce</title>
+        <title>[PH] Commerce</title>
         <meta name="description" content="A simple commerce" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

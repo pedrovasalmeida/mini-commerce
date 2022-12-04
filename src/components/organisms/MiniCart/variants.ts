@@ -19,8 +19,9 @@ export const modalVariants = {
   visible: {
     opacity: 1,
     x: 0,
+    overflow: 'hidden',
     transition: {
-      ease: 'anticipate',
+      ease: 'linear',
       duration: 0.5,
     },
   },
@@ -28,7 +29,7 @@ export const modalVariants = {
     opacity: 0,
     x: '100%',
     transition: {
-      ease: 'anticipate',
+      ease: 'linear',
       duration: 0.5,
     },
   },
