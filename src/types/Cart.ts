@@ -5,6 +5,7 @@ export interface CartItems extends Product {
 }
 
 export interface Cart {
+  cartFetchedFromState: boolean
   items: CartItems[]
   uniqueItemsCount: number
   totalItemsCount: number

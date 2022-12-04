@@ -3,6 +3,7 @@ import { cartReducers } from './reducers'
 import { Cart } from '../../types/Cart'
 
 const initialState: Cart = {
+  cartFetchedFromState: false,
   items: [],
   uniqueItemsCount: 0,
   totalItemsCount: 0,
@@ -21,6 +22,7 @@ export const cartSlice = createSlice({
 })
 
 export const {
+  getCartFromStorage,
   clearCart,
   addProductToCart,
   decreaseProductQuantity,
