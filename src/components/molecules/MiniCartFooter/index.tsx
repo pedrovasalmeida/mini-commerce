@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../store'
 import { formatPrice } from '../../../utils/handlePrice'
+import { MiniCartDiscountField } from '../MiniCartDiscountField'
 
 export function MiniCartFooter() {
   const { info, totalItemsCount } = useSelector(
@@ -10,15 +11,7 @@ export function MiniCartFooter() {
 
   return (
     <div className="flex flex-col h-auto mt-8">
-      <div className="flex w-full items-center justify-between gap-4">
-        <input
-          className="p-3 w-3/5 rounded-lg text-sm outline-gray-900"
-          placeholder="Cupom"
-        />
-        <button className="w-2/5 bg-green-600 h-auto p-3 rounded-lg font-bold text-gray-100 text-sm">
-          Aplicar
-        </button>
-      </div>
+      <MiniCartDiscountField />
 
       <div className="flex flex-col w-full mt-8 gap-4">
         <div className="flex justify-between items-center w-full">
