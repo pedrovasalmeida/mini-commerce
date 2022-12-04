@@ -29,18 +29,21 @@ export function LoginModal({ isOpen }: LoginModalProps) {
             A conta estará disponível em breve!
           </p>
           <div className="flex flex-col w-full">
-            <p className="font-bold m-0 text-start text-xs text-zinc-900">
+            <p className="font-bold m-0 text-start text-xs text-zinc-500">
               Usuário / E-mail
             </p>
-            <input className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs text-zinc-900" />
+            <input
+              disabled
+              className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs text-zinc-900 bg-white"
+            />
           </div>
           <div className="flex flex-col w-full">
-            <p className="font-bold m-0 text-start text-xs text-zinc-900">
+            <p className="font-bold m-0 text-start text-xs text-zinc-500">
               Senha
             </p>
             <input
-              type={'password'}
-              className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs"
+              disabled
+              className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs text-zinc-900 bg-white"
             />
           </div>
           <div className="flex items-center justify-between w-full">
