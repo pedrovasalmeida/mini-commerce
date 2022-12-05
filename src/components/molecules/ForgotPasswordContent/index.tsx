@@ -47,7 +47,7 @@ export function ForgotPasswordContent({
       </div>
       <div className="flex flex-col items-center justify-center w-full border-t border-t-zinc-300 pt-4">
         <button disabled className="w-full bg-zinc-400 rounded-lg py-2">
-          <p className="font-bold text-zinc-100">Entrar</p>
+          <p className="font-bold text-zinc-100">Solicitar recuperação</p>
         </button>
         <button
           onClick={() => navigateTo('close')}
