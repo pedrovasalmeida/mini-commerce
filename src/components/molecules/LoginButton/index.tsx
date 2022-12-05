@@ -13,7 +13,10 @@ export function Login() {
       >
         <AiOutlineUser size={24} />
       </button>
-      <LoginModal isOpen={isLoginModalOpen} />
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        changeVisibility={setIsLoginModalOpen}
+      />
     </div>
   )
 }
