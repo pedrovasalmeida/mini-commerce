@@ -1,66 +1,55 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
+import { ForgotPasswordContent } from '../../molecules/ForgotPasswordContent'
+import { LoginContent } from '../../molecules/LoginContent'
+import { RegisterContent } from '../../molecules/RegisterContent'
 
 interface LoginModalProps {
   isOpen: boolean
+  changeVisibility: (visibility: boolean) => void
 }
 
-export function LoginModal({ isOpen }: LoginModalProps) {
+type LoginSteps = 'login' | 'register' | 'forgot-password'
+
+export function LoginModal({ isOpen, changeVisibility }: LoginModalProps) {
+  const [loginStep, setLoginStep] = useState<LoginSteps | null>('login')
+
+  const navigateTo = (step: LoginSteps | 'close') => {
+    if (step === 'close') {
+      changeVisibility(false)
+      setLoginStep('login')
+    } else {
+      setLoginStep(step)
+    }
+  }
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -100, height: 0, overflow: 'hidden' }}
-          animate={{ opacity: 1, y: 0, height: 'auto' }}
-          transition={{ ease: 'backInOut', duration: 1 }}
-          exit={{ opacity: 0, y: -100, height: 0 }}
-          className={`
-              flex flex-col gap-4
-              w-screen min-w-[270px] max-w-[288px]
-              absolute top-8 -left-44
-              p-4
-              bg-zinc-100 
-              border border-zinc-400 
-              rounded-lg
-              overflow-hidden
-              z-10
-          `}
-        >
-          <p className="m-0 text-sm font-bold border-b border-b-zinc-300 pb-2">
-            A conta estará disponível em breve!
-          </p>
-          <div className="flex flex-col w-full">
-            <p className="font-bold m-0 text-start text-xs text-zinc-500">
-              Usuário / E-mail
-            </p>
-            <input
-              disabled
-              className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs text-zinc-900 bg-white"
-            />
-          </div>
-          <div className="flex flex-col w-full">
-            <p className="font-bold m-0 text-start text-xs text-zinc-500">
-              Senha
-            </p>
-            <input
-              disabled
-              className="w-full rounded-lg p-2 px-3 mt-2 outline-zinc-900 text-xs text-zinc-900 bg-white"
-            />
-          </div>
-          <div className="flex items-center justify-between w-full">
-            <p className="text-zinc-500 text-xs underline cursor-pointer">
-              Cadastre-se
-            </p>
-            <p className="text-zinc-500 text-xs underline cursor-pointer">
-              Esqueci minha senha
-            </p>
-          </div>
-          <div className="flex items-center justify-center w-full border-t border-t-zinc-300 pt-4">
-            <button disabled className="w-full bg-zinc-400 rounded-lg py-2">
-              <p className="font-bold text-zinc-100">Entrar</p>
-            </button>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className={`bg-gray-900 fixed top-0 left-0 w-screen h-screen z-10`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.5 }}
+            transition={{ ease: 'linear', duration: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => navigateTo('close')}
+          />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {loginStep === 'login' && <LoginContent navigateTo={navigateTo} />}
+            {loginStep === 'register' && (
+              <RegisterContent navigateTo={navigateTo} />
+            )}
+            {loginStep === 'forgot-password' && (
+              <ForgotPasswordContent navigateTo={navigateTo} />
+            )}
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
