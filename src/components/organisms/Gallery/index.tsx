@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { useState } from 'react'
 
 import { GalleryCard } from '../../molecules/GalleryCard'
 import { ProductDetailsModal } from '../ProductDetailsModal'
@@ -39,16 +39,14 @@ export function Gallery({
       </div>
 
       <div className="flex flex-wrap gap-6 justify-start items-center">
-        <Suspense fallback={<div>Loading...</div>}>
-          {products?.map((product) => (
-            <GalleryCard
-              key={product?.id}
-              product={product}
-              toggleProductDetailModal={toggleProductDetailModal}
-              setProductSelected={setProductSelected}
-            />
-          ))}
-        </Suspense>
+        {products?.map((product) => (
+          <GalleryCard
+            key={product?.id}
+            product={product}
+            toggleProductDetailModal={toggleProductDetailModal}
+            setProductSelected={setProductSelected}
+          />
+        ))}
       </div>
 
       <ProductDetailsModal
