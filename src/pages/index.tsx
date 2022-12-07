@@ -1,19 +1,32 @@
-import { GetServerSideProps } from 'next'
 import Head from 'next/head'
-import { Suspense, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FooterMessage } from '../components/atoms/FooterMessage'
 
 import { Gallery } from '../components/organisms/Gallery'
+import { GallerySkeleton } from '../components/organisms/GallerySkeleton'
 import { Header } from '../components/organisms/Header'
 import { api } from '../services/api'
 import { Product } from '../types/Product'
 
-interface HomeProps {
-  productsFromApi: Product[]
-}
-
-export default function Home({ productsFromApi }: HomeProps) {
+export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
+  const [productsFromApi, setProductsFromApi] = useState<Product[]>([])
+  const [loadingProducts, setLoadingProducts] = useState(true)
+
+  const getProductsFromApi = useCallback(async () => {
+    try {
+      if (!loadingProducts) setLoadingProducts(true)
+
+      const response = await api.get('/products?offset=0&limit=20')
+
+      setProductsFromApi(response.data)
+    } catch (err) {
+      console.error('Ocorreu um erro ao buscar os produtos: ', err)
+      setProductsFromApi([])
+    } finally {
+      setLoadingProducts(false)
+    }
+  }, [])
 
   const searchTermInProducts = useCallback(
     (term: string) => {
@@ -34,6 +47,10 @@ export default function Home({ productsFromApi }: HomeProps) {
   )
 
   useEffect(() => {
+    getProductsFromApi()
+  }, [getProductsFromApi])
+
+  useEffect(() => {
     setProducts(productsFromApi)
   }, [productsFromApi])
 
@@ -47,34 +64,38 @@ export default function Home({ productsFromApi }: HomeProps) {
 
       <Header searchTermInProducts={searchTermInProducts} />
       <main className="py-9 px-2 max-w-5xl mx-auto">
-        <Suspense fallback={<div>Loading...</div>}>
+        {loadingProducts && products?.length <= 0 && (
+          <GallerySkeleton quantity={8} />
+        )}
+
+        {!loadingProducts && products?.length > 0 && (
           <Gallery
             title="Recomendados"
             products={products}
             showViewAllButton={false}
           />
-        </Suspense>
+        )}
       </main>
       <FooterMessage />
     </div>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  try {
-    const response = await api.get('/products?offset=0&limit=20')
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   try {
+//     const response = await api.get('/products?offset=0&limit=20')
 
-    return {
-      props: {
-        productsFromApi: response.data,
-      },
-      // revalidate: 60 * 60 * 12, // 12 hours
-    }
-  } catch {
-    return {
-      props: {
-        productsFromApi: [],
-      },
-    }
-  }
-}
+//     return {
+//       props: {
+//         productsFromApi: response.data,
+//       },
+//       // revalidate: 60 * 60 * 12, // 12 hours
+//     }
+//   } catch {
+//     return {
+//       props: {
+//         productsFromApi: [],
+//       },
+//     }
+//   }
+// }
