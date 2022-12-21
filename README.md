@@ -4,6 +4,8 @@ This is a personal project created with [Next.js](https://nextjs.org/), [TypeScr
 
 Check the [preview here](https://mini-commerce.vercel.app/).
 
+![preview](https://user-images.githubusercontent.com/54509925/208913824-e3ba27fc-714c-4b23-980a-8b9dd593921a.png)
+
 Work in progress...
 
 ---
